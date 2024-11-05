@@ -164,8 +164,12 @@ def mouse_click2(x, y):
     time.sleep(0.15)
 
 
-bs = image_input()
-# print(bs)
-tpl = solve(bs)
-mouse_press_list(tpl)
-print("Yes")
+def main():
+    bs = image_input()
+    # print(bs)
+    tpl = solve(bs)
+    mouse_press_list(tpl)
+
+
+if __name__ == "__main__":
+    main()
