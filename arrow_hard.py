@@ -1,7 +1,7 @@
 import time
-import win32api, win32con
 import pyautogui
 import mouse
+# import win32api, win32con
 
 # Every valid tile in this coordinate system
 VALID_TILES = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6),
@@ -148,12 +148,12 @@ def mouse_press_list(to_press) -> None:
         mouse_click2(COORDINATES[i[0]][i[1]][0], COORDINATES[i[0]][i[1]][1])
 
 
-def mouse_click(x, y):
-    win32api.SetCursorPos((x,y))
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-    time.sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
-    time.sleep(0.15)
+# def mouse_click(x, y):
+#     win32api.SetCursorPos((x,y))
+#     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
+#     time.sleep(0.01)
+#     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
+#     time.sleep(0.15)
 
 
 def mouse_click2(x, y):
