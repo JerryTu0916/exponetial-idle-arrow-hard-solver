@@ -84,22 +84,12 @@ def solve(board_state) -> list:
     
     # Turn the list into a tuple, for use in dict
     lookup_key = tuple(parity_bits)
+    
+    solve_parity_clicks = parity_lookup(lookup_key)
 
-    # Populate the parity dictionary
-    lookup_dict = dict()
-    lookup_dict[(True, True, False, True, False, True, True)] = [(0, 3), (0, 6)]
-    lookup_dict[(True, False, True, False, True, False, True)] = [(0, 4), (0, 5)]
-    lookup_dict[(True, False, False, False, False, False, True)] = [(0, 1), (0, 3), (0, 4), (0, 6)]
-    lookup_dict[(False, True, True, False, True, True, False)] = [(0, 3), (0, 5)]
-    lookup_dict[(False, True, False, False, False, True, False)] = [(0, 3)]
-    lookup_dict[(False, False, True, True, True, False, False)] = [(0, 4), (0, 5), (0, 6)]
-    lookup_dict[(False, False, False, True, False, False, False)] = [(0, 2), (0, 3), (0, 5)]
-    
-    # 'Click' to solve parity
-    for i in lookup_dict[lookup_key]:
+    for i in solve_parity_clicks:
         ret.append(i)
-        press(i[0], i[1], board_state)
-    
+
     # Propagate again; this time solving this board
     for i in order:
         if not board_state[i[0]][i[1]] and (i[0] + 1, i[1]) in VALID_TILES:
@@ -112,6 +102,20 @@ def solve(board_state) -> list:
     
     # Return a list of coordinates to click on
     return ret
+
+
+def parity_lookup(lookup_key):
+    # Populate the parity dictionary
+    lookup_dict = dict()
+    lookup_dict[(True, True, False, True, False, True, True)] = [(0, 3), (0, 6)]
+    lookup_dict[(True, False, True, False, True, False, True)] = [(0, 4), (0, 5)]
+    lookup_dict[(True, False, False, False, False, False, True)] = [(0, 1), (0, 3), (0, 4), (0, 6)]
+    lookup_dict[(False, True, True, False, True, True, False)] = [(0, 3), (0, 5)]
+    lookup_dict[(False, True, False, False, False, True, False)] = [(0, 3)]
+    lookup_dict[(False, False, True, True, True, False, False)] = [(0, 4), (0, 5), (0, 6)]
+    lookup_dict[(False, False, False, True, False, False, False)] = [(0, 2), (0, 3), (0, 5)]
+    
+    return lookup_dict[lookup_key]
 
 
 def press(x, y, board_state) -> None:
